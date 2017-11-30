@@ -38,7 +38,7 @@
     <script src="js/filters/mapAlignment.js"></script>
 
   </head>
-  <body>
+  <body oncontextmenu="return false;">
 
         <toaster-container 
             toaster-options="
