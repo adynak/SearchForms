@@ -43,15 +43,25 @@ formsBuilder.config(['$routeProvider', '$locationProvider', function($routeProvi
         controller: 'UploadFormController',
         task: 'getsessiondata'
     }).
-    otherwise({
-        redirectTo: '/login',
+    when('/getSecurity',{
+        templateUrl: 'views/security.html',
+        controller: 'SecurityController',
         task: 'getsessiondata'
-
+    }).    
+    otherwise({
+        redirectTo: '/login'
     });
 
 
 }]).run(function($rootScope, $location, Data) {
     $rootScope.$on("$routeChangeStart", function(event, next, current) {
+
+        var securityInfo = Data.getSecurityInfo();
+        if (securityInfo.stop){
+            $location.path("/getSecurity");
+            next.templateUrl = 'views/security.html';
+        }
+
         Data.setIsNotLoggedIn(true);
         Data.setAuthenticated(false);
 
@@ -61,6 +71,7 @@ formsBuilder.config(['$routeProvider', '$locationProvider', function($routeProvi
         var nextUrl = next.templateUrl;
         Data.getSession(next.task).then(function(results) {
             if (results[0].id) {
+
                 $rootScope.isnotloggedin = false;
                 $rootScope.authenticated = true;
 
@@ -75,7 +86,10 @@ formsBuilder.config(['$routeProvider', '$locationProvider', function($routeProvi
                     $location.path("/success");
                 }
             } else {
-                if (nextUrl == 'views/register.html' || nextUrl == 'views/login.html') {
+
+                if (nextUrl == 'views/register.html' || 
+                    nextUrl == 'views/login.html' || 
+                    nextUrl == 'views/security.html') {
                 } else {
                     $location.path("/login");
                 }

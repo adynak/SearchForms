@@ -29,6 +29,7 @@
     <script src="js/controllers/registration.js"></script>    
     <script src="js/controllers/profile.js"></script>
     <script src="js/controllers/success.js"></script>
+    <script src="js/controllers/security.js"></script>
     <script src="js/controllers/nav.js"></script>    
     <script src="js/factory/dataService.js"></script>
     <script src="js/factory/listService.js"></script>

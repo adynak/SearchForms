@@ -1,15 +1,20 @@
 <?php
-$fp = fopen('test.txt','a+');
+
 $debug = false ;
 
+if ($debug){
+  $fp = fopen('test.txt','a+');
+}
+
 session_start();
-
-$dbSchema = 'formsbuilder';
-
-$conn=@pg_connect("host=127.0.0.1 user=postgres dbname=postgres password=********");
-
 $data = json_decode(file_get_contents("php://input"));
 
+
+$dbSchema = $data->securityInfo->schema;
+$dbPass   = $data->securityInfo->dbPass;
+
+$conn_string = "host=127.0.0.1 port=5432 dbname=postgres user=postgres password=$dbPass";
+$conn = pg_connect($conn_string);
 
 if ($data->task == 'validate') {
   $debug = false;
@@ -195,26 +200,28 @@ else if ($data->task == 'updateuser') {
 }
 
 if ($debug) {
-  fwrite($fp , 'task = ' . print_r($data->userInfo,1));
+  fwrite($fp , 'task = ' . print_r($conn_string,1));
   fwrite($fp , "\n");
-  fwrite($fp , print_r($member,1));
+  fwrite($fp , print_r($data->securityInfo->schema,1));
   fwrite($fp , "\n");
+  fwrite($fp , print_r($data->securityInfo->dbPass,1));
+  fwrite($fp , "\n");
+
   fwrite($fp , 'sql = ' . $sql);
-  // fwrite($fp , "\n");
-  //   fwrite($fp , 'sequence = ' . print_r($sequence,1));
+  fwrite($fp , "\n");
+  // fwrite($fp , 'sequence = ' . print_r($sequence,1));
   // fwrite($fp , "\n");
 
-  fwrite($fp , 'session = ' . $_SESSION["currentuser"]);
-  fwrite($fp , "\n");
+  // fwrite($fp , 'session = ' . $_SESSION["currentuser"]);
+  // fwrite($fp , "\n");
   // if (sizeof($myArray) > 0) {
   //   fwrite($fp , json_encode($myArray));
   //   fwrite($fp , "\n");
-    fwrite($fp , print_r($myArray,1));
-    fwrite($fp , "\n");
+  // fwrite($fp , print_r($myArray,1));    // fwrite($fp , "\n");
   //   fwrite($fp , $myArray[0][max]);
   //   fwrite($fp , "\n");
   // }
-  fwrite($fp , "\n");
+  // fwrite($fp , "\n");
   // fwrite($fp , print_r($addMsg,1));
 
   $debug = false ;

@@ -227,3 +227,14 @@ var sampleForm = {
         }
     ]
 };
+
+var txtSecurity = {
+    required: true,
+    schema: 'Schema Name',
+    dbPass: 'Database Password',
+    btnSubmit: 'Save',
+    errSchemaRequired: 'Scnema Name is Required',
+    errDbPassRequired: 'Database Password is Requried',
+    saveSecurity: 'Schema and Database Password Saved.',
+    saveSecurityFailed: "That Didn't Work.  Try Again or Close This WebPage."
+};

@@ -1,8 +1,13 @@
 formsBuilder.factory("Data", ['$http', '$q', '$rootScope',
     function($http, $q, $rootScope) {
 
-        var factoryVariables = [
-        ];
+        var factoryVariables = {
+            securityInfo : {
+                schema: null,
+                dbPass: null,
+                stop: true
+            }
+        };
 
         var setFileAttributes = function(attrs){
             // {name: name, blob: blob ; }
@@ -53,12 +58,30 @@ formsBuilder.factory("Data", ['$http', '$q', '$rootScope',
             return factoryVariables.activeMember;
         }
 
+        var setSecurityInfo = function(securityInfo){
+            localStorage.setItem('catsndogs', securityInfo.schema);
+            localStorage.setItem('teainchina', securityInfo.dbPass);
+            factoryVariables.securityInfo = securityInfo;
+        }
+
+        var getSecurityInfo = function(){
+            if (factoryVariables.securityInfo.schema == null || factoryVariables.securityInfo.dbPass == null){
+                factoryVariables.securityInfo.schema = localStorage.getItem('catsndogs');
+                factoryVariables.securityInfo.dbPass = localStorage.getItem('teainchina');
+                if (factoryVariables.securityInfo.schema !== null || factoryVariables.securityInfo.dbPass !== null){
+                    factoryVariables.securityInfo.stop = false;
+                }
+            }
+            return factoryVariables.securityInfo;
+        }
+
         var validateCredentials = function(member){
             var qObject = $q.defer();
             var params = {
                 email: member.email,
                 password: member.password,
-                task: 'validate'
+                task: 'validate',
+                securityInfo: getSecurityInfo()
             };
             $http({
                 method: 'POST',
@@ -101,7 +124,8 @@ formsBuilder.factory("Data", ['$http', '$q', '$rootScope',
             var qObject = $q.defer();
             var params = {
                 userInfo: member,
-                task: 'updateuser'
+                task: 'updateuser',
+                securityInfo: getSecurityInfo()
             };
             $http({
                 method: 'POST',
@@ -122,7 +146,8 @@ formsBuilder.factory("Data", ['$http', '$q', '$rootScope',
         var logout = function(member){
             var qObject = $q.defer();
             var params = {
-                task: 'logout'
+                task: 'logout',
+                securityInfo: getSecurityInfo()
             };
             $http({
                 method: 'POST',
@@ -142,7 +167,8 @@ formsBuilder.factory("Data", ['$http', '$q', '$rootScope',
         var getSession = function(task){
             var qObject = $q.defer();
             var params = {
-                task: task
+                task: task,
+                securityInfo: getSecurityInfo()
             };
             $http({
                 method: 'POST',
@@ -176,7 +202,9 @@ formsBuilder.factory("Data", ['$http', '$q', '$rootScope',
             setFileAttributes: setFileAttributes,
             getFileAttributes: getFileAttributes,
             getFormDefinition: getFormDefinition,
-            setFormDefinition: setFormDefinition
+            setFormDefinition: setFormDefinition,
+            setSecurityInfo: setSecurityInfo,
+            getSecurityInfo: getSecurityInfo
         };
     }
 ]);

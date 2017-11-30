@@ -4,7 +4,6 @@ formsBuilder.controller('RegistrationController', ['$scope', '$http', '$location
         $scope.prompts    = txtLogin;
         $scope.promptsReg = txtProfile;
         $scope.required   = false;
-        $scope.image      = 'resources/images/drinks.jpeg';
         
         $scope.member = {
             email:'adynak@gmail.com',
