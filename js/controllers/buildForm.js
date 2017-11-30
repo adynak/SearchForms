@@ -13,7 +13,7 @@ formsBuilder.controller('BuildFormController', ['$scope', 'ListServices', '$uibM
             formFields: []
         };
 
-        var debug = true;
+        var debug = false;
         if (debug) {
             Data.setFormDefinition(sampleForm);
         } 
@@ -70,7 +70,6 @@ formsBuilder.controller('BuildFormController', ['$scope', 'ListServices', '$uibM
                     }
                 }
             }).result.then(function(result) {
-                debugger;
                 // OK - save the field definition
                 fieldNumber ++
                 formDefinition.formFields.push(result);
@@ -80,7 +79,6 @@ formsBuilder.controller('BuildFormController', ['$scope', 'ListServices', '$uibM
                 ListServices.renumberFields(formDefinition.formFields);
                 Data.setFormDefinition(formDefinition);
             }, function(result) {
-                debugger;
                 // not OK - remove the field marker
                 MarkerServices.removeSpot(vector);
             });
