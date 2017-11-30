@@ -4,9 +4,9 @@ $debug = false ;
 
 session_start();
 
-$dbSchema = 'draanks';
+$dbSchema = 'formsbuilder';
 
-$conn=@pg_connect("host=127.0.0.1 user=postgres dbname=postgres password=Ad17934!");
+$conn=@pg_connect("host=127.0.0.1 user=postgres dbname=postgres password=********");
 
 $data = json_decode(file_get_contents("php://input"));
 
