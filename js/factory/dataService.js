@@ -6,16 +6,20 @@ formsBuilder.factory("Data", ['$http', '$q', '$rootScope',
                 schema: null,
                 dbPass: null,
                 stop: true
+            },
+            fileAttributes: {
+                name: null,
+                blob: null
             }
         };
 
         var setFileAttributes = function(attrs){
             // {name: name, blob: blob ; }
-            factoryVariables.FileAttributes = attrs;
+            factoryVariables.fileAttributes = attrs;
         }
 
         var getFileAttributes = function(){
-            return factoryVariables.FileAttributes;
+            return factoryVariables.fileAttributes;
         }
 
         var setFormDefinition = function(formDefinition){
