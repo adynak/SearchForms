@@ -10,12 +10,6 @@ formsBuilder.controller('RegistrationController', ['$scope', '$http', '$location
             password:'adynak'
         };
 
-        var guest = {
-            email:    'guest',
-            password: 'guest',
-            onlineID: 'guest'
-        };
-
         $scope.login = function() {
             member = $scope.member;
             if (typeof(member) == 'undefined') member = guest ;
