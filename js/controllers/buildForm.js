@@ -31,7 +31,7 @@ formsBuilder.controller('BuildFormController', ['$scope', 'ListServices', '$uibM
                 event.preventDefault();
 
                 $uibModal.open({
-                    templateUrl: 'views/templates/modal.html',
+                    templateUrl: 'views/templates/saveForm.html',
                     controller: saveOrCancelController,
                     resolve: {
                         formDefinition: function() {
