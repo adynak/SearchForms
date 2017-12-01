@@ -39,11 +39,9 @@ formsBuilder.controller('BuildFormController', ['$scope', 'ListServices', '$uibM
                         }
                     }
                     }).result.then(function(result) {
-                        // OK - save the field definition
+                        // OK - save the field definition - done in controller
                     }, function(result) {
-                        // not OK - remove the field marker
-                        MarkerServices.wipeSpots(formDefinition);
-                        window.history.go(-1);
+                        // not OK - remove the field marker - done in controller
                 });
 
                 return false;
@@ -93,7 +91,6 @@ var saveOrCancelController = function($scope, $uibModalInstance, $http, formDefi
     $scope.formDefinition  = formDefinition;
 
     $scope.saveFormDefinition = function() {
-
         var sortedFormFields = _.sortBy(formDefinition.formFields, ["vertical", "horizontal"]);
         formDefinition.formFields = sortedFormFields;
         ListServices.renumberFields(formDefinition.formFields);
@@ -106,7 +103,10 @@ var saveOrCancelController = function($scope, $uibModalInstance, $http, formDefi
     };
 
     $scope.cancel = function() {
+        MarkerServices.wipeSpots(formDefinition);
+        MarkerServices.wipeFields(formDefinition);        
         $uibModalInstance.dismiss('cancel');
+        window.history.go(-1);
     };
 
     $scope.checkInputs = function(){

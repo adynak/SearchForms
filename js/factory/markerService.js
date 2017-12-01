@@ -43,11 +43,16 @@ formsBuilder.factory("MarkerServices", ['$http', '$q', '$rootScope',
             }
         }
 
+        var wipeFields = function(formDefinition){
+            formDefinition.formFields = [];
+        }
+
         return {
             addSpot: addSpot,
             removeSpot: removeSpot,
             splashSpots: splashSpots,
-            wipeSpots: wipeSpots
+            wipeSpots: wipeSpots,
+            wipeFields: wipeFields
         };
     }
 ]);
