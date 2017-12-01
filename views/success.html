@@ -21,7 +21,7 @@
           </a>
         </li>        
 
-        <li ng-class="menuShowBuildForms()">
+        <li ng-class="menuShowBuildForm()">
           <a href="#/buildForm">{{prompts.menuBuildForm}}
             <span style="font-size:16px;"
                   class="pull-right hidden-xs showopacity glyphicon glyphicon-wrench icon-green">
@@ -29,8 +29,7 @@
           </a>
         </li>        
 
-        <!-- <li ng-if="member.member_type == 1"> -->
-        <li ng-class="menuShowDisplayForms()">
+        <li ng-class="menuShowDisplayForm()">
           <a href="#/displayForm">{{prompts.menuDisplayForm}}
             <span style="font-size:16px;"
                   class="pull-right hidden-xs showopacity glyphicon glyphicon-th-list icon-blue">
@@ -38,7 +37,6 @@
           </a>
         </li>
 
-        <!-- <li ng-if="member.member_type == 1"> -->
         <li ng-class="menuShowUploadForm()">
           <a href="#/uploadForm">{{prompts.menuUploadForm}}
             <span style="font-size:16px;"

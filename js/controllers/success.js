@@ -15,15 +15,15 @@ formsBuilder.controller('SuccessController', ['$scope', '$http', '$location', 'D
             }
         }
 
-        $scope.menuShowBuildForms = function() {
+        $scope.menuShowBuildForm = function() {
             return ListServices.menuOptions('menuBuildForm');
         }
 
-        $scope.menuShowDisplayForms = function(){
+        $scope.menuShowDisplayForm = function(){
             return ListServices.menuOptions('menuDisplayForm');
         }
 
-        $scope.menuShowDisplayForms = function(){
+        $scope.menuShowUploadForm = function(){
             return ListServices.menuOptions('menuUploadForm');
         }
 
