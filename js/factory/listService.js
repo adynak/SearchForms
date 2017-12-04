@@ -50,10 +50,14 @@ formsBuilder.factory("ListServices", ['$http', '$q', '$rootScope', 'Data',
             }
 
             if (menuItem == 'menuUploadForm'){
-                if (Data.getFormDefinition().formName === null){
+                if (Data.getCurrentMember().member_type == 0){
                     return 'disabled';
                 } else {
-                    return '';
+                    if (Data.getFormDefinition().formName === null){
+                        return 'disabled';
+                    } else {
+                        return '';
+                    }
                 }
             }
 
