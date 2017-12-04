@@ -20,12 +20,19 @@ formsBuilder.directive("filelistBind", function(Data) {
                 fileAttributes.name = evt.target.files[0].name;
                 fileAttributes.blob = URL.createObjectURL(event.target.files[0]);
                 Data.setFileAttributes(fileAttributes);
-                var formDefinition = {
+                var newForm = {
                         showFormName: true,
                         formName: null,
                         formFields: []
                     };
-                Data.setFormDefinition(formDefinition);
+
+                Data.getWipForm(fileAttributes).then(function(sampleForm) {
+                    if (sampleForm){
+                        Data.setFormDefinition(sampleForm);
+                    } else {
+                        Data.setFormDefinition(newForm);
+                    }
+                });                    
             });
         });
     };

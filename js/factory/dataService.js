@@ -189,6 +189,30 @@ formsBuilder.factory("Data", ['$http', '$q', '$rootScope',
             return qObject.promise;
         }
 
+        var getWipForm = function(pdfName){
+            var qObject = $q.defer();
+            var params = {
+                formName: pdfName.name,
+                securityInfo: getSecurityInfo()
+            };
+            console.log(params);
+            $http({
+                method: 'POST',
+                url: 'resources/dataServices/wipForms.php',
+                data: params,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }                
+            }).then(function(success) {
+                console.log('success',success);
+                qObject.resolve(success.data);
+            }, function(err) {
+                console.log(err);
+            });
+            return qObject.promise;
+        };
+
+
         return {
             validateCredentials: validateCredentials,
             registerMember: registerMember,
@@ -208,7 +232,8 @@ formsBuilder.factory("Data", ['$http', '$q', '$rootScope',
             getFormDefinition: getFormDefinition,
             setFormDefinition: setFormDefinition,
             setSecurityInfo: setSecurityInfo,
-            getSecurityInfo: getSecurityInfo
+            getSecurityInfo: getSecurityInfo,
+            getWipForm: getWipForm
         };
     }
 ]);

@@ -13,11 +13,6 @@ formsBuilder.controller('BuildFormController', ['$scope', 'ListServices', '$uibM
             formFields: []
         };
 
-        var debug = false;
-        if (debug) {
-            Data.setFormDefinition(sampleForm);
-        } 
-
         formDefinition = Data.getFormDefinition();
 
         // place any existing spots
