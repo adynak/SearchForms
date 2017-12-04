@@ -21,10 +21,10 @@ formsBuilder.directive("filelistBind", function(Data) {
                 fileAttributes.blob = URL.createObjectURL(event.target.files[0]);
                 Data.setFileAttributes(fileAttributes);
                 var newForm = {
-                        showFormName: true,
-                        formName: null,
-                        formFields: []
-                    };
+                    showFormName: true,
+                    formName: null,
+                    formFields: []
+                };
 
                 Data.getWipForm(fileAttributes).then(function(sampleForm) {
                     if (sampleForm){

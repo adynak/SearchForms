@@ -89,7 +89,8 @@ var txtPrompts = {
     form: 'Form:',
     contextMessageText: 'You have a decision to make!',
     saveChanges: 'Save Changes',
-    discardChanges: 'Discard Changes'
+    discardChanges: 'Discard Changes',
+    resetAll: 'Reset All Fields'
 };
 
 var txtCommon = {

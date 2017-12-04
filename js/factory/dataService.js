@@ -193,9 +193,9 @@ formsBuilder.factory("Data", ['$http', '$q', '$rootScope',
             var qObject = $q.defer();
             var params = {
                 formName: pdfName.name,
-                securityInfo: getSecurityInfo()
+                securityInfo: getSecurityInfo(),
+                action: 'read'
             };
-            console.log(params);
             $http({
                 method: 'POST',
                 url: 'resources/dataServices/wipForms.php',
@@ -204,7 +204,29 @@ formsBuilder.factory("Data", ['$http', '$q', '$rootScope',
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }                
             }).then(function(success) {
-                console.log('success',success);
+                qObject.resolve(success.data);
+            }, function(err) {
+                console.log(err);
+            });
+            return qObject.promise;
+        };
+
+        var setWipForm = function(pdfName,jsonForm){
+            var qObject = $q.defer();
+            var params = {
+                formName: pdfName.name,
+                securityInfo: getSecurityInfo(),
+                jsonForm: jsonForm,
+                action: 'write'
+            };
+            $http({
+                method: 'POST',
+                url: 'resources/dataServices/wipForms.php',
+                data: params,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }                
+            }).then(function(success) {
                 qObject.resolve(success.data);
             }, function(err) {
                 console.log(err);
@@ -233,7 +255,8 @@ formsBuilder.factory("Data", ['$http', '$q', '$rootScope',
             setFormDefinition: setFormDefinition,
             setSecurityInfo: setSecurityInfo,
             getSecurityInfo: getSecurityInfo,
-            getWipForm: getWipForm
+            getWipForm: getWipForm,
+            setWipForm: setWipForm
         };
     }
 ]);

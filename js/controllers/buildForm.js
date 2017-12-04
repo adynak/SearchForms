@@ -97,20 +97,39 @@ var saveOrCancelController = function($scope, $uibModalInstance, $http, formDefi
         window.history.go(-1);
     };
 
-    $scope.cancel = function() {
+    $scope.discardChanges = function() {
+        MarkerServices.wipeSpots(formDefinition);
+        MarkerServices.wipeFields(formDefinition); 
+
+        Data.getWipForm(Data.getFileAttributes()).then(function(sampleForm) {
+            if (sampleForm){
+                Data.setFormDefinition(sampleForm);
+            } else {
+                var newForm = {
+                    showFormName: true,
+                    formName: null,
+                    formFields: []
+                };                
+                Data.setFormDefinition(newForm);
+            }
+        });     
+
+        $uibModalInstance.dismiss('cancel');
+        window.history.go(-1);
+    };
+
+    $scope.resetAllFields = function(){
         MarkerServices.wipeSpots(formDefinition);
         MarkerServices.wipeFields(formDefinition);        
         $uibModalInstance.dismiss('cancel');
         window.history.go(-1);
     };
 
-    $scope.checkInputs = function(){
-        if ($scope.fieldDefinition.name.length > 0 &&
-            $scope.fieldDefinition.width >= 0 && 
-            $scope.fieldDefinition.alignment.length > 0){
-            return false;
-        } else {
+    $scope.checkFormName = function(){
+        if ($scope.formDefinition.formName == null){
             return true;
+        } else {
+            return false;
         }
     };
 
