@@ -28,7 +28,8 @@ var txtNavigation = {
     btnLogin: 'Login',
     btnRegister: 'Register',
     btnLogout: 'Logout',
-    replyTo: 'al.dynak@cdk.com'
+    replyTo: 'al.dynak@cdk.com',
+    appDomain: 'cdk.com'
 };
 
 var txtSideMenu = {
