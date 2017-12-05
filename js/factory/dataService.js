@@ -107,21 +107,23 @@ formsBuilder.factory("Data", ['$http', '$q', '$rootScope',
             var qObject = $q.defer();
             delete member.confirmpassword;
             member.onlineid = member.email.substring(0, member.email.lastIndexOf("@"));
+            member.webApp = txtNavigation.brandName;
+            member.replyTo = txtNavigation.replyTo;
             var params = "&" + $.param(member);
             var webApp = 'https://script.google.com/macros/s/AKfycbwL0BWFFP7Pz-qsjqpuLUCEtjlN2qSvxehkmLXzued3xhron0lS/exec';
-            $http({
-                method: 'POST',
-                url: webApp,
-                data: params,
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-            }).then(function(success) {
-                qObject.resolve(success.data);
-            }, function(err) {
-                console.log(err);
-            });
-            return qObject.promise;            
+            // $http({
+            //     method: 'POST',
+            //     url: webApp,
+            //     data: params,
+            //     headers: {
+            //         'Content-Type': 'application/x-www-form-urlencoded'
+            //     },
+            // }).then(function(success) {
+            //     qObject.resolve(success.data);
+            // }, function(err) {
+            //     console.log(err);
+            // });
+            // return qObject.promise;            
         }
 
         var updateMemberInfo = function(member){

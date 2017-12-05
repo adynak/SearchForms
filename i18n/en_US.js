@@ -20,14 +20,15 @@ var txtLogin = {
     credentialsInvalid: 'The email or password you have entered is invalid.',
     registrationSuccess: 'Your request has been received.  Look for email confirmation soon.',
     registrationSent: 'Processing your request',
-    registerPageTitle: 'Register'
+    registerPageTitle: 'Register for '
 };
 
 var txtNavigation = {
     brandName: 'Forms Builder',
     btnLogin: 'Login',
     btnRegister: 'Register',
-    btnLogout: 'Logout'
+    btnLogout: 'Logout',
+    replyTo: 'al.dynak@cdk.com'
 };
 
 var txtSideMenu = {

@@ -3,6 +3,7 @@ formsBuilder.controller('RegistrationController', ['$scope', '$http', '$location
 
         $scope.prompts    = txtLogin;
         $scope.promptsReg = txtProfile;
+        $scope.promptsNav = txtNavigation;
         $scope.required   = false;
         
         $scope.member = {
