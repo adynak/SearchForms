@@ -1,4 +1,4 @@
-##Forms Builder
+## Forms Builder
 
 This is a single page application that can be used to identify input fields on a PDF form.  Load a scanned form as a PDF into this app and mark the locations of input fields.  You can also specify the field width and the alignment of the input field.
 
@@ -54,7 +54,7 @@ Look in **i18n/en_us** for branding, email addresses, and default user settings.
 
 Change the configuration in the postgreSQL script to suit your needs.
 
-The project has an email feature that uses an existing google script.  The repo contains a copy of it that you can modify, submit to google, register and deploy as a web app.  Change the email URL to the new one assigned to you by google.
+The project has an email feature that uses an existing google script.  The repo contains a [copy](https://github.com/adynak/FormsBuilder/blob/master/resources/scripts/script.gs) that you can modify, submit to google, register and deploy as a web app.  Change the email URL to the new one assigned to you by google.
 
 
 ## Authors
