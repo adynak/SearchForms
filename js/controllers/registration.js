@@ -6,10 +6,11 @@ formsBuilder.controller('RegistrationController', ['$scope', '$http', '$location
         $scope.promptsNav = txtNavigation;
         $scope.required   = false;
         
-        $scope.member = {
-            email:'adynak@gmail.com',
-            password:'adynak'
-        };
+        // you can default this, but the default must exist in postgreSQL->schema->table also
+        // $scope.member = {
+        //     email:'',
+        //     password:''
+        // };
 
         $scope.login = function() {
             member = $scope.member;
