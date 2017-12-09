@@ -1,5 +1,5 @@
-formsBuilder.controller('RegistrationController', ['$scope', '$http', '$location', 'Data', '$rootScope', 'toaster',
-    function($scope, $http, $location, Data, $rootScope, toaster) {
+formsBuilder.controller('RegistrationController', ['$scope', '$http', '$location', 'Data', '$rootScope', 'toaster', 'MarkerServices',
+    function($scope, $http, $location, Data, $rootScope, toaster, MarkerServices) {
 
         $scope.prompts    = txtLogin;
         $scope.promptsReg = txtProfile;
@@ -75,6 +75,8 @@ formsBuilder.controller('RegistrationController', ['$scope', '$http', '$location
         $scope.logout = function() {
             Data.logout().then(function(status) {
                 if (status == 'success') {
+                    var formDefinition = Data.getFormDefinition();
+                    MarkerServices.wipeSpots(formDefinition);
                     $location.path('/login');
                     toaster.pop('info', "", txtLogin.logOut, 3000, 'trustedHtml');
                 } else {
