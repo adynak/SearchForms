@@ -31,7 +31,7 @@ formsBuilder.factory("MarkerServices", ['$http', '$q', '$rootScope',
                 vector.spotID     = 'spot' + formDefinition.formFields[s].fieldNumber;
                 addSpot(vector);
             }
-
+            return numberOfSpots;
         }
 
         var wipeSpots = function(formDefinition){

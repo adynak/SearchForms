@@ -16,8 +16,9 @@ formsBuilder.controller('BuildFormController', ['$scope', 'ListServices', '$uibM
         formDefinition = Data.getFormDefinition();
 
         // place any existing spots
-        MarkerServices.splashSpots(formDefinition);
-
+        var numberOfSpots = MarkerServices.splashSpots(formDefinition);
+        fieldNumber = numberOfSpots + 1 ;
+        
         $scope.showPopup = function(event) {
             var rightClick = 3;
             var vector = {};
