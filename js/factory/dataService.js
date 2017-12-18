@@ -5,6 +5,7 @@ formsBuilder.factory("Data", ['$http', '$q', '$rootScope',
             securityInfo : {
                 schema: null,
                 dbPass: null,
+                dpPort: null,
                 stop: true
             },
             fileAttributes: {
@@ -65,14 +66,20 @@ formsBuilder.factory("Data", ['$http', '$q', '$rootScope',
         var setSecurityInfo = function(securityInfo){
             localStorage.setItem('catsndogs', securityInfo.schema);
             localStorage.setItem('teainchina', securityInfo.dbPass);
+            localStorage.setItem('countingbluecars', securityInfo.dbPass);
             factoryVariables.securityInfo = securityInfo;
         }
 
         var getSecurityInfo = function(){
-            if (factoryVariables.securityInfo.schema == null || factoryVariables.securityInfo.dbPass == null){
+            if (factoryVariables.securityInfo.schema == null || 
+                factoryVariables.securityInfo.dbPass == null ||
+                factoryVariables.securityInfo.dpPort == null){
                 factoryVariables.securityInfo.schema = localStorage.getItem('catsndogs');
                 factoryVariables.securityInfo.dbPass = localStorage.getItem('teainchina');
-                if (factoryVariables.securityInfo.schema !== null || factoryVariables.securityInfo.dbPass !== null){
+                factoryVariables.securityInfo.dbPort = localStorage.getItem('countingbluecars');
+                if (factoryVariables.securityInfo.schema !== null || 
+                    factoryVariables.securityInfo.dbPass !== null ||
+                    factoryVariables.securityInfo.dbPort !== null){
                     factoryVariables.securityInfo.stop = false;
                 }
             }

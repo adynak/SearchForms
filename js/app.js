@@ -55,7 +55,6 @@ formsBuilder.config(['$routeProvider', '$locationProvider', function($routeProvi
 
 }]).run(function($rootScope, $location, Data) {
     $rootScope.$on("$routeChangeStart", function(event, next, current) {
-
         var securityInfo = Data.getSecurityInfo();
         if (securityInfo.stop){
             $location.path("/getSecurity");
