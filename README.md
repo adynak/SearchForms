@@ -54,16 +54,16 @@ Look in **i18n/en_us** for branding, email addresses, and default user settings.
 
 Change the configuration in the postgreSQL script to suit your needs.
 
-The project has an email feature that uses an existing google script.  The repo contains a [copy](https://github.com/adynak/FormsBuilder/blob/master/resources/scripts/script.gs) that you can modify, submit to google, register and deploy as a web app.  Change the email URL to the new one assigned to you by google.
+The project has an email feature that uses an existing google script.  The repo contains a [copy](https://github.com/adynak/searchForms/blob/master/resources/scripts/script.gs) that you can modify, submit to google, register and deploy as a web app.  Change the email URL to the new one assigned to you by google.
 
 
 ## Authors
 
 * **Al Dynak** - *Initial work* 
 
-See also the list of [contributors](https://github.com/adynak/FormsBuilder/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/adynak/searchForms/contributors) who participated in this project.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/adynak/FormsBuilder/blob/master/LICENSE) file for details
+This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/adynak/searchForms/blob/master/LICENSE) file for details
 

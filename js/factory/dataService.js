@@ -1,4 +1,4 @@
-formsBuilder.factory("Data", ['$http', '$q', '$rootScope',
+searchForms.factory("Data", ['$http', '$q', '$rootScope',
     function($http, $q, $rootScope) {
 
         var factoryVariables = {
@@ -13,6 +13,22 @@ formsBuilder.factory("Data", ['$http', '$q', '$rootScope',
                 blob: null
             }
         };
+
+        var setSearchMatches = function(searchResults){
+            factoryVariables.searchRessults = searchResults;
+        }
+
+        var getSearchMatches = function(){
+            return factoryVariables.searchRessults;
+        }
+
+        var setSearchPattern = function(pattern){
+            factoryVariables.searchPattern = pattern;
+        }
+
+        var getSearchPattern = function(){
+            return factoryVariables.searchPattern;
+        }
 
         var setFileAttributes = function(attrs){
             // {name: name, blob: blob ; }
@@ -86,76 +102,26 @@ formsBuilder.factory("Data", ['$http', '$q', '$rootScope',
             return factoryVariables.securityInfo;
         }
 
-        var validateCredentials = function(member){
+        var searchFormsFiles = function(member){
             var qObject = $q.defer();
             var params = {
-                email: member.email,
-                password: member.password,
-                task: 'validate',
+                task: 'search',
                 securityInfo: getSecurityInfo()
             };
             $http({
                 method: 'POST',
-                url: 'resources/dataServices/formsBuilder.php',
+                url: 'resources/dataServices/searchForms.php',
                 data: params,
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
+                // headers: {
+                //     'Content-Type': 'application/x-www-form-urlencoded'
+                // },
             }).then(function(success) {
                 qObject.resolve(success.data);
             }, function(err) {
                 console.log(err);
             });
             return qObject.promise;            
-        }
-
-        var registerMember = function(member) {
-            // https://script.google.com/macros/d/MNYmhNDROwSuCBulBjpCOBQxbFS9WIK2d/edit?uiv=2&mid=ACjPJvEKyT7zYT3fN-Bh1kBFyqiw_j-NG0SCSo6rc8dz7_7-9NTrsj5jSdurrMX2vu4lYc7bcXFNQFhfPeq_OqzPSlpd9Gs2g6YQLT_tIItlrJTTIi-nhs6yiSsIL-QsJeoPX6K2BBxTuGc
-            var qObject = $q.defer();
-            delete member.confirmpassword;
-            member.onlineid = member.email.substring(0, member.email.lastIndexOf("@"));
-            member.webApp = txtNavigation.brandName;
-            member.replyTo = txtNavigation.replyTo;
-            member.appDomain = txtNavigation.appDomain;
-            var params = "&" + $.param(member);
-            var webApp = 'https://script.google.com/macros/s/AKfycbwL0BWFFP7Pz-qsjqpuLUCEtjlN2qSvxehkmLXzued3xhron0lS/exec';
-            $http({
-                method: 'POST',
-                url: webApp,
-                data: params,
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-            }).then(function(success) {
-                qObject.resolve(success.data);
-            }, function(err) {
-                console.log(err);
-            });
-            return qObject.promise;            
-        }
-
-        var updateMemberInfo = function(member){
-            var qObject = $q.defer();
-            var params = {
-                userInfo: member,
-                task: 'updateuser',
-                securityInfo: getSecurityInfo()
-            };
-            $http({
-                method: 'POST',
-                url: 'resources/dataServices/formsBuilder.php',
-                data: params,
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-            }).then(function(success) {
-                qObject.resolve(success.data);
-
-            }, function(err) {
-                console.log(err);
-            });
-            return qObject.promise;
-        }
+        };
 
         var logout = function(member){
             var qObject = $q.defer();
@@ -165,7 +131,7 @@ formsBuilder.factory("Data", ['$http', '$q', '$rootScope',
             };
             $http({
                 method: 'POST',
-                url: 'resources/dataServices/formsBuilder.php',
+                url: 'resources/dataServices/searchForms.php',
                 data: params,
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
@@ -186,7 +152,7 @@ formsBuilder.factory("Data", ['$http', '$q', '$rootScope',
             };
             $http({
                 method: 'POST',
-                url: 'resources/dataServices/formsBuilder.php',
+                url: 'resources/dataServices/searchForms.php',
                 data: params,
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
@@ -199,56 +165,12 @@ formsBuilder.factory("Data", ['$http', '$q', '$rootScope',
             return qObject.promise;
         }
 
-        var getWipForm = function(pdfName){
-            var qObject = $q.defer();
-            var params = {
-                formName: pdfName.name,
-                securityInfo: getSecurityInfo(),
-                action: 'read'
-            };
-            $http({
-                method: 'POST',
-                url: 'resources/dataServices/wipForms.php',
-                data: params,
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                }                
-            }).then(function(success) {
-                qObject.resolve(success.data);
-            }, function(err) {
-                console.log(err);
-            });
-            return qObject.promise;
-        };
-
-        var setWipForm = function(pdfName,jsonForm){
-            var qObject = $q.defer();
-            var params = {
-                formName: pdfName.name,
-                securityInfo: getSecurityInfo(),
-                jsonForm: jsonForm,
-                action: 'write'
-            };
-            $http({
-                method: 'POST',
-                url: 'resources/dataServices/wipForms.php',
-                data: params,
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                }                
-            }).then(function(success) {
-                qObject.resolve(success.data);
-            }, function(err) {
-                console.log(err);
-            });
-            return qObject.promise;
-        };
-
-
         return {
-            validateCredentials: validateCredentials,
-            registerMember: registerMember,
-            updateMemberInfo: updateMemberInfo,
+            searchFormsFiles: searchFormsFiles,
+            setSearchMatches: setSearchMatches,
+            getSearchMatches: getSearchMatches,
+            setSearchPattern: setSearchPattern,
+            getSearchPattern: getSearchPattern,
             logout: logout,
             getSession: getSession,
             setCurrentMember: setCurrentMember,
@@ -264,9 +186,7 @@ formsBuilder.factory("Data", ['$http', '$q', '$rootScope',
             getFormDefinition: getFormDefinition,
             setFormDefinition: setFormDefinition,
             setSecurityInfo: setSecurityInfo,
-            getSecurityInfo: getSecurityInfo,
-            getWipForm: getWipForm,
-            setWipForm: setWipForm
+            getSecurityInfo: getSecurityInfo
         };
     }
 ]);

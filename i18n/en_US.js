@@ -1,35 +1,12 @@
 var txtLogin = {
-    // labels for login page
-    onlineID: 'Online ID',
-    email: 'email',
-    logIn: 'Log in',
-    logOut: 'Logged out successfully',
-    password: 'Password',
-    passwordConfirm: 'Confirm Password',
-    errOnlineID: 'OnlineID is required',
-    errEmail: 'Email is required',
-    errPasswordRequired: 'Password is required',
-    errPasswordDifferent: 'Passwords Do Not Match!',
-    errPasswordInvalid: 'Minimum length is 5 characters.',
-    errPassword: 'Minimum length is 55 characters.',
-    btnLogin: 'Login',
-    btnRegister: 'Register',
-    btnLogout: 'Logout',
-    btnPasswordHelp: 'Need Login Help?',
-    credentialsValid: 'You are now logged in.',
-    credentialsInvalid: 'The email or password you have entered is invalid.',
-    registrationSuccess: 'Your request has been received.  Look for email confirmation soon.',
-    registrationSent: 'Processing your request',
-    registerPageTitle: 'Register for '
+    // labels for search page
+    placeHolderSearchPattern: 'search pattern',
+    btnLogin: 'Search',
+    searchInProgress: 'Searching for '
 };
 
 var txtNavigation = {
-    brandName: 'Forms Builder',
-    btnLogin: 'Login',
-    btnRegister: 'Register',
-    btnLogout: 'Logout',
-    replyTo: 'al.dynak@cdk.com',
-    appDomain: 'cdk.com'
+    brandName: 'Search FI-FORMS',
 };
 
 var txtSideMenu = {
@@ -40,33 +17,33 @@ var txtSideMenu = {
 };
 
 var txtProfile = {
-    pageTitle: 'Update Your Profile',
-    onlineID: 'OnlineID',
-    errOnlineID: 'OnlineID required',
-    password: 'Password',
-    errPasswordRequired: 'Password is required',
-    errPasswordDifferent: 'Passwords Do Not Match!',
-    errPasswordLength: 'Minimum length is 5 characters.',
-    passwordConfirm: 'Confirm Password',
-    nameFirst: 'First Name',
-    errNameFirst: 'Member first name required',
-    nameLast: 'Last Name',
-    errNameLast: 'Member last name required.',
-    nameBusiness: 'Business Name',
-    errNameBusiness: 'Member business name required.',
-    occupation: 'Occupation',
-    errOccupation: 'Member occupation name required.',
-    phonePrimary: 'Phone Number',
-    errPhonePrimary: 'Phone Number is required.',
-    phoneAlternate: 'Alternate Phone Number',
-    email: 'Email Address',
-    errEmail: 'Must be a valid email address.',
-    comment: 'Comment',
-    commentOptional: 'Comments (optional)',
-    btnSubmit: 'Update',
-    btnCancel: 'Cancel',
-    updateSuccessful: 'Profile Updated Successfully',
-    btnRegister: 'Register'
+    // pageTitle: 'Update Your Profile',
+    // onlineID: 'OnlineID',
+    // errOnlineID: 'OnlineID required',
+    // password: 'Password',
+    // errPasswordRequired: 'Password is required',
+    // errPasswordDifferent: 'Passwords Do Not Match!',
+    // errPasswordLength: 'Minimum length is 5 characters.',
+    // passwordConfirm: 'Confirm Password',
+    // nameFirst: 'First Name',
+    // errNameFirst: 'Member first name required',
+    // nameLast: 'Last Name',
+    // errNameLast: 'Member last name required.',
+    // nameBusiness: 'Business Name',
+    // errNameBusiness: 'Member business name required.',
+    // occupation: 'Occupation',
+    // errOccupation: 'Member occupation name required.',
+    // phonePrimary: 'Phone Number',
+    // errPhonePrimary: 'Phone Number is required.',
+    // phoneAlternate: 'Alternate Phone Number',
+    // email: 'Email Address',
+    // errEmail: 'Must be a valid email address.',
+    // comment: 'Comment',
+    // commentOptional: 'Comments (optional)',
+    // btnSubmit: 'Update',
+    // btnCancel: 'Cancel',
+    // updateSuccessful: 'Profile Updated Successfully',
+    // btnRegister: 'Register'
 }
 
 var txtPrompts = {
@@ -102,18 +79,17 @@ var txtCommon = {
 var txtReviewForm = {
     btnCancel: 'Done',
     pluralsFields: [
-        {tag: 'No Fields'},
-        {tag: 'Field'},
-        {tag: 'Fields'}
+        {tag: 'No Matches for '},
+        {tag: 'Match for '},
+        {tag: 'Matches for '}
     ],
-    gridColumnFieldNumber: 'Field Number',
-    gridColumnName: 'Field Name',
-    gridColumnWidth: 'Width',
-    gridColumnAlignment: 'Alignment',
-    gridColumnHorizontal: 'Horizontal',
-    gridColumnVertical: 'Vertical',
-    gridColumnAction: 'Action',
-    tooltipDelete: 'Click to delete this field from the form'
+    gridColumnAccount: 'Account',
+    gridColumnFormID: 'Form ID',
+    gridColumnFormName: 'Form Name',
+    gridColumnDate: 'Date',
+    gridColumnDescription: 'Description',
+    gridColumnComment: 'Comment',
+    searchEmptyText: 'search'
 };
 
 var markerConfig = {

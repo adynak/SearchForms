@@ -1,4 +1,4 @@
-formsBuilder.directive('pwCheck', [function() {
+searchForms.directive('pwCheck', [function() {
     return {
         require: 'ngModel',
         link: function(scope, elem, attrs, ctrl) {
@@ -12,7 +12,7 @@ formsBuilder.directive('pwCheck', [function() {
     }
 }]);
 
-formsBuilder.directive("filelistBind", function(Data) {
+searchForms.directive("filelistBind", function(Data) {
     return function(scope, elm, attrs) {
       var fileAttributes = {};
         elm.bind("change", function(evt) {
@@ -38,7 +38,7 @@ formsBuilder.directive("filelistBind", function(Data) {
     };
 });
 
-formsBuilder.directive('pdf', function() {
+searchForms.directive('pdf', function() {
     return {
         restrict: 'E',
         link: function(scope, element, attrs) {
