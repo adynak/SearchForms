@@ -400,3 +400,7 @@ body  {
   height: 70vh;
   background-color: #f2f2f2;
 }
+
+.app-modal-window .modal-dialog {
+  width: 800px;
+}

@@ -6,7 +6,8 @@
         "formName": "ALABAMA POA SOLD",
         "date": "03/18/2015",
         "description": "MVT 5-13 1/13  (SOLD)(PDF FILE)",
-        "comment": "(EXPO) KN (CH) CHECK DEALER SETUPS USED A3= SOLD VEH (B/C/BC/CB/O)"
+        "comment": "(EXPO) KN (CH) CHECK DEALER SETUPS USED A3= SOLD VEH (B/C/BC/CB/O)",
+        "formFields": ["1\\2\\3\\4","a\\b\\c\\d","2\\2\\3\\4"]
     }, {
         "account": "90-FI",
         "formID": "FORM*3439A",

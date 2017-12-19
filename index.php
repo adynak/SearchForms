@@ -24,6 +24,7 @@
 
     <script src="js/app.js"></script>
     <script src="js/controllers/displayForm.js"></script>
+    <script src="js/controllers/formDetail.js"></script>
     <script src="js/controllers/search.js"></script>    
     <script src="js/controllers/nav.js"></script>    
     <script src="js/factory/dataService.js"></script>
