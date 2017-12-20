@@ -3,6 +3,8 @@ searchForms.controller('SearchController', ['$scope', '$http', '$location', 'Dat
 
         $scope.prompts    = txtLogin;
         $scope.required   = true;
+
+        Data.setPageID();
         
         $scope.search = function() {
             Data.setSearchPattern($scope.searchPattern);

@@ -14,6 +14,22 @@ searchForms.factory("Data", ['$http', '$q', '$rootScope',
             }
         };
 
+        var setPageID = function(){
+            factoryVariables.pageID = getURLParameter('PageID');
+            console.log(factoryVariables.pageID);
+        };
+
+        var getPageID = function(){
+            return factoryVariables.pageID;
+        };
+
+        function getURLParameter(paramName) {
+            var href = window.location;
+            var reg = new RegExp( '[?&]' + paramName + '=([^&#]*)', 'i' );
+            var string = reg.exec(href);
+            return string ? string[1] : null;
+        }        
+
         var setSearchMatches = function(searchResults){
             factoryVariables.searchRessults = searchResults;
         }
@@ -106,9 +122,12 @@ searchForms.factory("Data", ['$http', '$q', '$rootScope',
             var qObject = $q.defer();
             var params = {
                 searchPattern: searchPattern,
+                pageID: Data.getPageID(),
                 task: 'search',
                 securityInfo: getSecurityInfo()
             };
+            console.log(params);
+
             $http({
                 method: 'POST',
                 url: 'resources/dataServices/searchForms.php',
@@ -173,6 +192,8 @@ searchForms.factory("Data", ['$http', '$q', '$rootScope',
             setSearchPattern: setSearchPattern,
             getSearchPattern: getSearchPattern,
             logout: logout,
+            getPageID: getPageID,
+            setPageID: setPageID,
             getSession: getSession,
             setCurrentMember: setCurrentMember,
             getCurrentMember: getCurrentMember,
