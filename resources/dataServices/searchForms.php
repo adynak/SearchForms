@@ -23,7 +23,7 @@ if ($data->task == 'search') {
   //   }]
   // }
   $debug = false;
-  $file = file_get_contents('/Library/WebServer/Documents/angular/git/SearchForms/search.json');
+  $file = file_get_contents('../../search.json');
   echo ($file);
 }
 
