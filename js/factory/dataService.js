@@ -102,9 +102,10 @@ searchForms.factory("Data", ['$http', '$q', '$rootScope',
             return factoryVariables.securityInfo;
         }
 
-        var searchFormsFiles = function(member){
+        var searchFormsFiles = function(searchPattern){
             var qObject = $q.defer();
             var params = {
+                searchPattern: searchPattern,
                 task: 'search',
                 securityInfo: getSecurityInfo()
             };

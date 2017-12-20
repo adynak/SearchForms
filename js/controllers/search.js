@@ -7,7 +7,7 @@ searchForms.controller('SearchController', ['$scope', '$http', '$location', 'Dat
         $scope.search = function() {
             Data.setSearchPattern($scope.searchPattern);
 
-            Data.searchFormsFiles($scope.search).then(function(status) {
+            Data.searchFormsFiles($scope.searchPattern).then(function(status) {
                 if (status.matched == true) {
                     Data.setSearchMatches(status.matchingForms);
                     $location.path('/displayForm');
