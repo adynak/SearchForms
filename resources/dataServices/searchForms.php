@@ -22,8 +22,15 @@ if ($data->task == 'search') {
   //       "comment": "(EXPO) KN (CH) CHECK DEALER SETUPS USED A3= SOLD VEH (B/C/BC/CB/O)"
   //   }]
   // }
-  $debug = false;
-  $file = file_get_contents('../../search.json');
+  $pageID = $_GET['pageID'];
+  $searchPattern = $_GET['searchPattern'];
+  $cmd  = 'cd /adp/tmp;';
+  $cmd .= 'ksh ffcSearchForms.ksh ';
+  $cmd .= $pageID . ' ';
+  $cmd .= $searchPattern;
+  $output = shell_exec($cmd);
+
+  $file = file_get_contents('/adp/3party/ffc/formSearch/$pageID.json');
   echo ($file);
 }
 
