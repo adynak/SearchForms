@@ -25,7 +25,7 @@ var txtReviewForm = {
     gridColumnDate: 'Date',
     gridColumnDescription: 'Description',
     gridColumnComment: 'Comment',
-    searchEmptyText: 'search',
+    searchEmptyText: 'filter',
     formFields: 'Form Fields:'
 };
 

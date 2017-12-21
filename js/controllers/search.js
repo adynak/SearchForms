@@ -3,12 +3,13 @@ searchForms.controller('SearchController', ['$scope', '$http', '$location', 'Dat
 
         $scope.prompts    = txtLogin;
         $scope.required   = true;
+        $scope.hideSearchInProgress = true;
 
         Data.setPageID();
         
         $scope.search = function() {
             Data.setSearchPattern($scope.searchPattern);
-
+            $scope.hideSearchInProgress = false;
             Data.searchFormsFiles($scope.searchPattern).then(function(status) {
                 if (status.matched == true) {
                     Data.setSearchMatches(status.matchingForms);
@@ -16,7 +17,7 @@ searchForms.controller('SearchController', ['$scope', '$http', '$location', 'Dat
                 } else {
                     Data.setCurrentMember('');
                     $scope.invalidMessage = txtLogin.credentialsInvalid;
-                    toaster.pop('error', "", txtLogin.credentialsInvalid, 3000, 'trustedHtml');
+                    toaster.pop('error', "", 'search gone bad', 3000, 'trustedHtml');
                 }
 
             }, function(err) {

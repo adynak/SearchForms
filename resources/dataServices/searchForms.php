@@ -1,9 +1,9 @@
 <?php
 
-$debug = false ;
+$debug = true ;
 
 if ($debug){
-  $fp = fopen('test.txt','a+');
+  $fp = fopen('/adp/3party/ffc/adynak/zap/test.txt','a+');
 }
 
 session_start();
@@ -22,16 +22,21 @@ if ($data->task == 'search') {
   //       "comment": "(EXPO) KN (CH) CHECK DEALER SETUPS USED A3= SOLD VEH (B/C/BC/CB/O)"
   //   }]
   // }
-  $pageID = $_GET['pageID'];
-  $searchPattern = $_GET['searchPattern'];
+  $pageID = $data->pageID;
+  $searchPattern = $data->searchPattern;
   $cmd  = 'cd /adp/tmp;';
   $cmd .= 'ksh ffcSearchForms.ksh ';
   $cmd .= $pageID . ' ';
   $cmd .= $searchPattern;
   $output = shell_exec($cmd);
 
-  $file = file_get_contents('/adp/3party/ffc/formSearch/$pageID.json');
+  $file = file_get_contents("/adp/3party/ffc/formSearch/$pageID.json");
+  // remove non-printing characters
+  $file = preg_replace('/[\x00-\x1F\x7F-\xFF]/', '', $file);
   echo ($file);
+  // clean up the mess
+  $cmd = "rm /adp/3party/ffc/formSearch/$pageID.json";
+  $output = shell_exec($cmd);
 }
 
 else if ($data->task == 'getsessiondata') {

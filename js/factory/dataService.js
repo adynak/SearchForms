@@ -11,24 +11,17 @@ searchForms.factory("Data", ['$http', '$q', '$rootScope',
             fileAttributes: {
                 name: null,
                 blob: null
-            }
+            },
+	        pageID: null
         };
 
         var setPageID = function(){
-            factoryVariables.pageID = getURLParameter('PageID');
-            console.log(factoryVariables.pageID);
+           factoryVariables.pageID = Math.floor(Math.random() * (200000-100000))+100000;
         };
 
         var getPageID = function(){
-            return factoryVariables.pageID;
+           return factoryVariables.pageID;
         };
-
-        function getURLParameter(paramName) {
-            var href = window.location;
-            var reg = new RegExp( '[?&]' + paramName + '=([^&#]*)', 'i' );
-            var string = reg.exec(href);
-            return string ? string[1] : null;
-        }        
 
         var setSearchMatches = function(searchResults){
             factoryVariables.searchRessults = searchResults;
@@ -122,11 +115,10 @@ searchForms.factory("Data", ['$http', '$q', '$rootScope',
             var qObject = $q.defer();
             var params = {
                 searchPattern: searchPattern,
-                pageID: Data.getPageID(),
+                pageID: getPageID(),
                 task: 'search',
                 securityInfo: getSecurityInfo()
             };
-            console.log(params);
 
             $http({
                 method: 'POST',

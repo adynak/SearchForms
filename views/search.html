@@ -20,6 +20,17 @@
 
       <div class="clearfix"></div>
 
+      <div class="form-group"
+           ng-hide="hideSearchInProgress">
+           <br>
+          <label for="onlineID" class="sr-only">{{prompts.searchPattern}}</label>
+          <input class="form-control grid-align-center" 
+                 type="text" 
+                 name="searchPattern" 
+                 placeholder="{{prompts.searchInProgress}} {{searchPattern}}"
+                 disabled="true">
+        </div>
+
       </form>
     </div>
   </div>

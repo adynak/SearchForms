@@ -11,17 +11,25 @@ searchForms.controller('DisplayFormController', ['$scope', '$http', '$location',
 
         $scope.myAppScopeProvider = {
 
-            showInfo : function(row) {
-               $uibModal.open({
-                    controller: 'FormDetailController',
-                    templateUrl: 'views/formDetail.html',
-                    windowClass: 'app-modal-window',                   
-                    resolve: {
-                      selectedRow: function () {                    
-                          return row.entity;
-                      }
-                    }
-               });
+            showInfo : function(row,event) {
+
+               if (event.which == 3){
+                  // event.target for IE; event.toElement for Chrome
+                  // but you knew that
+                  var rowInfo = angular.element(event.target).scope();
+                  var rowIndex = rowInfo.rowRenderIndex;
+                  $scope.gridApi.selection.selectRowByVisibleIndex(rowIndex);
+                  $uibModal.open({
+                       controller: 'FormDetailController',
+                       templateUrl: 'views/formDetail.html',
+                       windowClass: 'app-modal-window',                   
+                       resolve: {
+                         selectedRow: function () {                    
+                             return row.entity;
+                         }
+                       }
+                  });
+               }
            
             }
         }
@@ -37,12 +45,13 @@ searchForms.controller('DisplayFormController', ['$scope', '$http', '$location',
             data: gridData,
             enableRowSelection: true,
             multiSelect: false,
+            cellTooltip: true,
             enableRowHeaderSelection: false,
             onRegisterApi: function(gridApi){ 
                 $scope.gridApi = gridApi;
             },
             appScopeProvider: $scope.myAppScopeProvider,
-            rowTemplate: "<div ng-dblclick=\"grid.appScope.showInfo(row)\" ng-repeat=\"(colRenderIndex, col) in colContainer.renderedColumns track by col.colDef.name\" class=\"ui-grid-cell\" ng-class=\"{ 'ui-grid-row-header-cell': col.isRowHeader }\" ui-grid-cell></div>",
+            rowTemplate: "<div ng-mousedown=\"grid.appScope.showInfo(row,$event)\" ng-repeat=\"(colRenderIndex, col) in colContainer.renderedColumns track by col.colDef.name\" class=\"ui-grid-cell\" ng-class=\"{ 'ui-grid-row-header-cell': col.isRowHeader }\" ui-grid-cell></div>",
             columnDefs: [
                 {
                     name: 'account',
@@ -80,14 +89,16 @@ searchForms.controller('DisplayFormController', ['$scope', '$http', '$location',
                     displayName: $scope.prompts.gridColumnDescription,
                     cellClass: 'grid-align-left',
                     headerCellClass: 'grid-header-align-left',
-                    enableColumnMenu: false                    
+                    enableColumnMenu: false,
+                    cellTemplate: 'views/description.html'
                 },
                 {
                     name: 'comment',
                     displayName: $scope.prompts.gridColumnComment,
                     cellClass: 'grid-align-left',
                     headerCellClass: 'grid-header-align-left',
-                    enableColumnMenu: false                    
+                    enableColumnMenu: false,
+                    cellTemplate: 'views/comment.html'
                 },
                 {
                     name: 'formFields',
