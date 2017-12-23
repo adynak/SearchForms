@@ -1,27 +1,34 @@
-  <div class="modal-header">
-    <h4>{{selectedRow.account}} / {{selectedRow.formID}}</h4>
-  </div>
-  <div class="modal-body">
-    <span style="font-weight:bold;">{{prompts.gridColumnAccount}}: </span>
-    <span>{{selectedRow.formName}}</span>
-    <br/>
-    <span style="font-weight:bold;">{{prompts.gridColumnDate}}: </span>
-    <span>{{selectedRow.date}}</span>
-    <br/>
-    <span style="font-weight:bold;">{{prompts.gridColumnDescription}}: </span>
-    <span>{{selectedRow.description}}</span>
-    <br/>
-    <span style="font-weight:bold;">{{prompts.gridColumnComment}}: </span>
-    <span>{{selectedRow.comment}}</span>
-    <div ng-if="doesJsonHaveFormFields()" style="font-weight:bold;">
-      {{prompts.formFields}}
+<!-- <div class="row"> -->
+  <div class="modalDetail">
+    <div>
+      <h4>{{selectedRow.account}} / {{selectedRow.formID}}</h4>
     </div>
+    <div>
+      <span style="font-weight:bold;">{{prompts.gridColumnAccount}}: </span>
+      <span>{{selectedRow.formName}}</span>
+      <br/>
+      <span style="font-weight:bold;">{{prompts.gridColumnDate}}: </span>
+      <span>{{selectedRow.date}}</span>
+      <br/>
+      <span style="font-weight:bold;">{{prompts.gridColumnDescription}}: </span>
+      <span>{{selectedRow.description}}</span>
+      <br/>
+      <span style="font-weight:bold;">{{prompts.gridColumnComment}}: </span>
+      <span>{{selectedRow.comment}}</span>
+      <div ng-if="doesJsonHaveFormFields()" style="font-weight:bold;">
+        {{prompts.formFields}}
+        <div>
+          <div class="grid"
+               ui-grid="gridOptions"
+               ui-grid-selection>
+          </div>
+        </div>
 
-    <span ng-repeat="field in selectedRow.formFields">
-      {{$index+1}} - {{field}}
-      <br>
-    </span>
-  </div>
-  <div class="modal-footer">
+      </div>
+    </div>
+        
+    <br>
     <button class="btn btn-primary btnCustom" ng-click="ok()">OK</button>
-  </div>
+    <br><br>
+  <!-- </div> -->
+</div>

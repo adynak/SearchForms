@@ -402,11 +402,15 @@ body  {
 }
 
 .app-modal-window .modal-dialog {
-  width: 800px;
+  width: 90%;
 }
 
 .grid-tooltip {  
   overflow: visible;  
   z-index: 9999999;  
   float: left;
+}
+
+.modalDetail {
+  margin: 10px;
 }
