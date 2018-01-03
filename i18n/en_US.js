@@ -1,7 +1,8 @@
 var txtLogin = {
     placeHolderSearchPattern: 'search pattern',
     btnLogin: 'Search',
-    searchInProgress: 'Searching for '
+    searchInProgress: 'Searching for ',
+    errorMsg: 'Nice work searching for %1! There are errors in that search.' + "\n" + 'Maybe this will help: %2'
 };
 
 var txtNavigation = {

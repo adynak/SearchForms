@@ -15,9 +15,18 @@ searchForms.controller('SearchController', ['$scope', '$http', '$location', 'Dat
                     Data.setSearchMatches(status.matchingForms);
                     $location.path('/displayForm');
                 } else {
+                    var searchError;
                     Data.setCurrentMember('');
                     $scope.invalidMessage = txtLogin.credentialsInvalid;
-                    toaster.pop('error', "", 'search gone bad', 3000, 'trustedHtml');
+
+                    searchError = txtLogin.errorMsg.replace(/%1/,$scope.searchPattern);
+                    searchError = searchError.replace(/%2/,status.error);
+                    toaster.pop('error', "", searchError, 7000, 'trustedHtml');
+                    
+                    $scope.searchPattern = '';
+                    Data.setSearchPattern($scope.searchPattern);
+                    $scope.hideSearchInProgress = true;
+                    
                 }
 
             }, function(err) {
