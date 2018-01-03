@@ -3,7 +3,6 @@ searchForms.controller('FormDetailController', ['$scope', '$uibModal', '$uibModa
 
         $scope.selectedRow = selectedRow;
         $scope.prompts = txtReviewForm;
-        console.log(selectedRow.formFields);
 
         var gridData = selectedRow.formFields;
 
@@ -27,7 +26,8 @@ searchForms.controller('FormDetailController', ['$scope', '$uibModal', '$uibModa
                     cellClass: 'grid-align-right',
                     headerCellClass: 'grid-header-align-right',
                     enableColumnMenu: false,
-                    width: '3%'
+                    width: '3%',
+                    visible: false
                 },
                 {
                     name: 'vertical',
@@ -35,7 +35,8 @@ searchForms.controller('FormDetailController', ['$scope', '$uibModal', '$uibModa
                     cellClass: 'grid-align-right',                    
                     headerCellClass: 'grid-header-align-right',
                     enableColumnMenu: false ,
-                    width: '3%'
+                    width: '3%',
+                    visible: false
                 },
                 {
                     name: 'fieldNumber',
@@ -51,7 +52,7 @@ searchForms.controller('FormDetailController', ['$scope', '$uibModal', '$uibModa
                     cellClass: 'grid-align-right',                    
                     // headerCellClass: 'grid-header-align-right',
                     enableColumnMenu: false,
-                    width: '6%'                    
+                    width: '5%'                    
                 },
                 {
                     name: 'conversion',
@@ -101,7 +102,11 @@ searchForms.controller('FormDetailController', ['$scope', '$uibModal', '$uibModa
 
 
         $scope.doesJsonHaveFormFields = function(){
-            return selectedRow.formFields.length;
+            if ("formFields" in selectedRow){
+                return selectedRow.formFields.length;
+            } else {
+                return false;
+            }
         };
 
         $scope.ok = function () {
