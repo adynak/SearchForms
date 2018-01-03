@@ -1,5 +1,5 @@
 var searchForms = angular.module('searchForms', ['ngRoute', 'ngAnimate', 'toaster', 'ngTouch', 
-                                     'ui.grid', 'ui.grid.edit', 'ngMessages', 'ui.grid.grouping', 'ui.bootstrap', 'ui.grid.selection']);
+                                     'ui.grid', 'ui.grid.edit', 'ngMessages', 'ui.grid.grouping', 'ui.bootstrap', 'ui.grid.selection', 'ui.grid.resizeColumns']);
 
 searchForms.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
     

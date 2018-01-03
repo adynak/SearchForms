@@ -14,6 +14,7 @@ searchForms.controller('FormDetailController', ['$scope', '$uibModal', '$uibModa
             multiSelect: false,
             cellTooltip: true,
             enableRowHeaderSelection: false,
+            enableColumnResizing: true,
             onRegisterApi: function(gridApi){ 
                 $scope.gridApi = gridApi;
             },
