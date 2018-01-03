@@ -113,7 +113,6 @@ searchForms.controller('DisplayFormController', ['$scope', '$http', '$location',
 
 
         $scope.searchGrid = function() {
-            console.log($scope.searchText);
             $scope.gridOptions.data = $filter('filter')(gridData, $scope.searchText, undefined);
             // gridDimensions = ListServices.getGridHeight($scope.gridOptions, $scope.gridApi);
             // $scope.gridHeight = gridDimensions.gridHeight;
