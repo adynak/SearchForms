@@ -59,6 +59,7 @@ searchForms.controller('DisplayFormController', ['$scope', '$http', '$location',
                     cellClass: 'grid-align-left',
                     headerCellClass: 'grid-header-align-left',
                     enableColumnMenu: false,
+                    cellTemplate: 'views/tooltip.html',                    
                     width: '8%'
                 },
                 {
@@ -67,6 +68,7 @@ searchForms.controller('DisplayFormController', ['$scope', '$http', '$location',
                     cellClass: 'grid-align-left',                    
                     headerCellClass: 'grid-header-align-left',
                     enableColumnMenu: false ,
+                    cellTemplate: 'views/tooltip.html',                    
                     width: '10%'
                 },
                 {
@@ -74,7 +76,8 @@ searchForms.controller('DisplayFormController', ['$scope', '$http', '$location',
                     displayName: $scope.prompts.gridColumnFormName,
                     cellClass: 'grid-align-left',
                     headerCellClass: 'grid-header-align-left',
-                    enableColumnMenu: false
+                    enableColumnMenu: false,
+                    cellTemplate: 'views/tooltip.html'                    
                 },
                 { 
                     name: 'date',
@@ -82,7 +85,8 @@ searchForms.controller('DisplayFormController', ['$scope', '$http', '$location',
                     cellClass: 'grid-align-right',                    
                     headerCellClass: 'grid-header-align-right',
                     enableColumnMenu: false,
-                    width: '8%'                    
+                    cellTemplate: 'views/tooltip.html',                    
+                    width: '8%'
                 },
                 {
                     name: 'description',
@@ -90,7 +94,7 @@ searchForms.controller('DisplayFormController', ['$scope', '$http', '$location',
                     cellClass: 'grid-align-left',
                     headerCellClass: 'grid-header-align-left',
                     enableColumnMenu: false,
-                    cellTemplate: 'views/description.html'
+                    cellTemplate: 'views/tooltip.html'
                 },
                 {
                     name: 'comment',
@@ -98,7 +102,7 @@ searchForms.controller('DisplayFormController', ['$scope', '$http', '$location',
                     cellClass: 'grid-align-left',
                     headerCellClass: 'grid-header-align-left',
                     enableColumnMenu: false,
-                    cellTemplate: 'views/comment.html'
+                    cellTemplate: 'views/tooltip.html'
                 },
                 {
                     name: 'formFields',
@@ -110,7 +114,6 @@ searchForms.controller('DisplayFormController', ['$scope', '$http', '$location',
                 }                                
             ]
         };
-
 
         $scope.searchGrid = function() {
             $scope.gridOptions.data = $filter('filter')(gridData, $scope.searchText, undefined);

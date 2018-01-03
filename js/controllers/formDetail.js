@@ -61,9 +61,8 @@ searchForms.controller('FormDetailController', ['$scope', '$uibModal', '$uibModa
                     cellClass: 'grid-align-left',
                     // headerCellClass: 'grid-header-align-left',
                     enableColumnMenu: false,
-                    cellTemplate: 'views/description.html',
+                    cellTemplate: 'views/tooltip.html',
                     width: '5%'                    
-
                 },
                 {
                     name: 'justification',
@@ -71,7 +70,7 @@ searchForms.controller('FormDetailController', ['$scope', '$uibModal', '$uibModa
                     cellClass: 'grid-align-left',
                     // headerCellClass: 'grid-header-align-left',
                     enableColumnMenu: false,
-                    cellTemplate: 'views/comment.html',
+                    cellTemplate: 'views/tooltip.html',
                     width: '5%'                                        
                 },
                 {
@@ -80,6 +79,7 @@ searchForms.controller('FormDetailController', ['$scope', '$uibModal', '$uibModa
                     cellClass: 'grid-align-left',
                     // headerCellClass: 'grid-header-align-left',
                     enableColumnMenu: false,
+                    cellTemplate: 'views/tooltip.html'
                 },
                 {
                     name: 'default',
@@ -87,7 +87,7 @@ searchForms.controller('FormDetailController', ['$scope', '$uibModal', '$uibModa
                     cellClass: 'grid-align-left',
                     // headerCellClass: 'grid-header-align-left',
                     enableColumnMenu: false,
-                    cellTemplate: 'views/comment.html',
+                    cellTemplate: 'views/tooltip.html',
                     width: '10%'
                 },
                 {
@@ -96,6 +96,7 @@ searchForms.controller('FormDetailController', ['$scope', '$uibModal', '$uibModa
                     cellClass: 'grid-align-left',
                     // headerCellClass: 'grid-header-align-left',
                     enableColumnMenu: false,
+                    cellTemplate: 'views/tooltip.html'                    
                 }                                
             ]
         };
