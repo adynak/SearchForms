@@ -26,7 +26,16 @@ var txtReviewForm = {
     gridColumnDescription: 'Description',
     gridColumnComment: 'Comment',
     searchEmptyText: 'filter',
-    formFields: 'Form Fields:'
+    formFields: 'Form Fields:',
+    gridColumnHorizontal: 'H',
+    gridColumnVertical: 'V',
+    gridColumnFieldNumber: 'Field',
+    gridColumnWidth: 'Width',
+    gridColumnConversion: 'Conv',
+    gridColumnJustification: 'Just',
+    gridColumnDescription: 'Description',
+    gridColumnDefault: 'Default',
+    gridColumnPrintField: 'Print'
 };
 
 var markerConfig = {

@@ -28,7 +28,8 @@ if ($data->task == 'search') {
   $cmd .= 'ksh ffcSearchForms.ksh ';
   $cmd .= $pageID . ' ';
   $cmd .= $searchPattern;
-  $output = shell_exec($cmd);
+  // $output = shell_exec($cmd);
+  $pageID = 'search';
 
   $file = file_get_contents("/adp/3party/ffc/formSearch/$pageID.json");
   // remove non-printing characters
@@ -36,7 +37,7 @@ if ($data->task == 'search') {
   echo ($file);
   // clean up the mess
   $cmd = "rm /adp/3party/ffc/formSearch/$pageID.json";
-  $output = shell_exec($cmd);
+  // $output = shell_exec($cmd);
 }
 
 else if ($data->task == 'getsessiondata') {
