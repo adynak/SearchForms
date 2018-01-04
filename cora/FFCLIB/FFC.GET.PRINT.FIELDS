@@ -1,0 +1,65 @@
+      SUBROUTINE FFC.GET.PRINT.FIELDS(FormRec,PrintFields)
+      PROMPT ''
+      Json = '['
+      RowCount = DCOUNT(FormRec , CHAR(254))
+      FOR Rx = 10 TO RowCount
+*
+         V             = FormRec<Rx,1,1>
+         H             = FormRec<Rx,1,2>
+         FieldNumber   = FormRec<Rx,1,3>
+         Width         = FormRec<Rx,1,4>
+         Conversion    = FormRec<Rx,1,5>
+         Justification = FormRec<Rx,1,6>
+         Tmp           = FormRec<Rx,1,7>
+         GOSUB CleanIt
+         Description = Tmp
+         Tmp           = FormRec<Rx,1,8>
+         GOSUB CleanIt
+         Default = Tmp
+*
+         Wips = GROUP(FormRec<Rx> , CHAR(253) , 2 , 999)
+         VMC = DCOUNT(Wips , CHAR(253))
+         Math = ''
+         FOR Vx = 1 TO VMC
+            IF (Vx EQ 1) THEN
+               Math = Math : Wips<1,Vx,2>
+            END ELSE
+               Math = Math : Wips<1,Vx,1> : Wips<1,Vx,2>
+            END
+         NEXT Vx
+*
+         Json = Json : '{'
+*        Json = Json : '"horizontal":'    : (H)                   : ','
+*        Json = Json : '"vertical":'      : (V)                   : ','
+         Json = Json : '"fieldNumber":'   : DQUOTE(FieldNumber)   : ','
+         Json = Json : '"width":'         : DQUOTE(Width)         : ','
+         Json = Json : '"conversion":'    : DQUOTE(Conversion)    : ','
+         Json = Json : '"justification":' : DQUOTE(Justification) : ','
+         Json = Json : '"description":'   : DQUOTE(Description)   : ','
+         Json = Json : '"default":'       : DQUOTE(Default)       : ','
+         Tmp = Math
+         GOSUB CleanIt
+         Math = Tmp
+         Json = Json : '"printField":'    : DQUOTE(Math)
+         Json = Json : '}'
+         IF (Rx LT RowCount) THEN
+            Json = Json : ','
+         END
+      NEXT Rx
+      Json = Json : ']'
+      PrintFields = Json
+      RETURN
+*********************************************************************
+CleanIt: 
+      Tmp = CHANGE(Tmp , '\' , '\\')
+      Tmp = CHANGE(Tmp , ',' , '\\,')
+      Tmp = CHANGE(Tmp , '"' , '\\"')
+      Tmp = CHANGE(Tmp , "'" , ' ')
+      Tmp = CHANGE(Tmp , '"' , ' ')
+      Tmp = CHANGE(Tmp , '{' , '')
+      Tmp = CHANGE(Tmp , '}' , '')
+*      Tmp = CHANGE(Tmp , CHAR(253) , '\\]')
+*      Tmp = CHANGE(Tmp , CHAR(252) , '\\')
+      RETURN
+*********************************************************************
+      END
