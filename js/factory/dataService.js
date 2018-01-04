@@ -135,6 +135,29 @@ searchForms.factory("Data", ['$http', '$q', '$rootScope',
             return qObject.promise;            
         };
 
+        var setUsageTracking = function(numberOfMatches){
+            var qObject = $q.defer();
+            var params = {
+                task: 'trackUsage',
+                matchCount: numberOfMatches,
+                searchPattern: getSearchPattern()
+            };
+
+            $http({
+                method: 'POST',
+                url: 'resources/dataServices/usageTracking.php',
+                data: params,
+                // headers: {
+                //     'Content-Type': 'application/x-www-form-urlencoded'
+                // },
+            }).then(function(success) {
+                qObject.resolve(success.data);
+            }, function(err) {
+                console.log(err);
+            });
+            return qObject.promise;            
+        };
+
         var logout = function(member){
             var qObject = $q.defer();
             var params = {
@@ -200,7 +223,8 @@ searchForms.factory("Data", ['$http', '$q', '$rootScope',
             getFormDefinition: getFormDefinition,
             setFormDefinition: setFormDefinition,
             setSecurityInfo: setSecurityInfo,
-            getSecurityInfo: getSecurityInfo
+            getSecurityInfo: getSecurityInfo,
+            setUsageTracking: setUsageTracking
         };
     }
 ]);
