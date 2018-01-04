@@ -1,0 +1,187 @@
+* Program to search FI-FORMS in several -FI accounts for a string
+* The string can be anywhere in the item.
+* The accounts to search are contained in ADP/FFCLIB SearchAccounts
+* This program is called by a shell script and writes to
+* a serialized item in a DIR-VIEW file for use by a Drive php program
+* Author: Dynak
+Main: 
+      GOSUB Init
+      GOSUB OpenRead
+      GOSUB GetSearchPattern
+      GOSUB ApplySearchPattern
+      GOSUB WriteToDirView
+      GOSUB AtExit 
+      STOP
+*********************************************************************
+Init: 
+*
+      DIM McData(15)
+      DIM Files(10)
+      MAT McData = ''
+
+      VM = CHAR(253)
+
+      PageID = GROUP(SENTENCE() , ' ' , 2 , 1)
+      DirViewID = PageID : '.json'
+      Choke = 999
+      RETURN
+*********************************************************************
+OpenRead: 
+      OpenArg = 1
+      FileToOpen = 'FFCLIB'
+      AcctName = 'ADP'
+      LibraryFilename = AcctName : '/' : FileToOpen
+      OPEN '' , LibraryFilename TO TmpFile THEN
+         OpenArg = ''
+      END ELSE
+         CALL UT.RBLD.Q.PTR(LibraryFilename , AcctName , ...
+         FileToOpen , TmpFile , OpenArg)
+      END
+      IF (OpenArg EQ '') THEN
+         LibraryFile = TmpFile
+         READ DashFI FROM LibraryFile , 'SearchAccounts' ELSE
+            Errmsg<-1> = LibraryFileName : ': SearchAccounts'
+         END
+      END ELSE
+* need an errmsg here
+         NULL
+      END
+*
+      Port = SYSTEM(18)
+      OpenArg = 1
+      FileToOpen = 'FFC.FORM.SEARCH'
+      AcctName = 'ADP'
+      DirViewFilename = AcctName : '/' : FileToOpen
+      OPEN '' , DirViewFilename TO DirViewFile THEN
+         OpenArg = ''
+      END ELSE
+         Stmt = 'DIR-VIEW FFC.FORM.SEARCH /adp/3party/ffc/formSearch'
+         PERFORM Stmt CAPTURING Output
+         OPEN '' , DirViewFilename TO DirViewFile THEN
+            OpenArg = ''
+         END ELSE
+            CALL UT.RBLD.Q.PTR(DirViewFilename , AcctName , ...
+            FileToOpen , DirViewFile , OpenArg)
+         END
+      END
+      DELETE DirViewFile , DirViewID
+      RETURN
+*********************************************************************
+GetSearchPattern: 
+      PageID = GROUP(SENTENCE() , ' ' , 2 , 1)
+      SearchPattern = GROUP(SENTENCE() , ' ' , 3 , 999)
+      RETURN
+*********************************************************************
+ApplySearchPattern: 
+      MAT McData = ''
+      RowCount = 0
+      FOR Ax = 1 TO DCOUNT(DashFI<1>,VM)
+         FileToOpen = 'FI-FORMS'
+         AcctName = DashFI<1,Ax>
+         SearchFile = AcctName : '/' : FileToOpen
+         OPEN '' , SearchFile TO TmpFile THEN
+            OpenArg = ''
+         END ELSE
+            CALL UT.RBLD.Q.PTR(SearchFile , AcctName , ...
+            'FI-FORMS' , TmpFile , OpenArg)
+         END
+         IF (OpenArg EQ '') THEN
+            FormsFile = TmpFile
+            Stmt = 'SEARCH ' : SearchFile : ' *'
+            DATA SearchPattern
+            DATA ''
+            PERFORM Stmt RTNLIST FormList CAPTURING Output
+* put a limit on this return
+            LOOP
+               READNEXT FormID FROM FormList THEN
+                  IF (RowCount LT Choke) THEN
+                     ListDone = 0
+                  END ELSE
+                     ListDone = 1
+                  END
+               END ELSE
+                  ListDone = 1
+               END
+            UNTIL ListDone DO
+               READ FormRec FROM FormsFile , FormID THEN
+                  RowCount = RowCount + 1
+                  McData(1)<1,-1> = AcctName
+                  McData(2)<1,-1> = FormID
+                  Tmp = FormRec<1>
+                  GOSUB CleanIt
+                  McData(3)<1,-1> = Tmp
+                  McData(4)<1,-1> = OCONV(FormRec<2> , 'D4/')
+                  Tmp = FormRec<3>
+                  GOSUB CleanIt
+                  McData(5)<1,-1> = Tmp
+                  Tmp = FormRec<7>
+                  GOSUB CleanIt
+                  McData(6)<1,-1> = Tmp
+                  GOSUB GetFormConfig
+                  McData(7)<1,-1> = FormConfig
+               END ELSE
+                  NULL
+               END
+            REPEAT
+         END
+      NEXT Ax
+      RETURN
+*********************************************************************
+WriteToDirView: 
+      Json = '{'
+      Json = Json : '"matched":'
+      Rows = DCOUNT(McData(1)<1> , VM)
+      IF (Rows GT 0) THEN
+         Json = Json : 'true,'
+         Json = Json : '"matchingForms":['
+         FOR Rx = 1 TO Rows
+            Json = Json : '{'
+            Json = Json : '"account":'     : DQUOTE(McData(1)<1,Rx>)
+            Json = Json : ','
+            Json = Json : '"formID":'      : DQUOTE(McData(2)<1,Rx>)
+            Json = Json : ','
+            Json = Json : '"formName":'    : DQUOTE(McData(3)<1,Rx>)
+            Json = Json : ','
+            Json = Json : '"date":'        : DQUOTE(McData(4)<1,Rx>)
+            Json = Json : ','
+            Json = Json : '"description":' : DQUOTE(McData(5)<1,Rx>)
+            Json = Json : ','
+            Json = Json : '"comment":'     : DQUOTE(McData(6)<1,Rx>)
+            Json = Json : ','
+            Json = Json : '"formFields":'  : McData(7)<1,Rx>
+            Json = Json : '}'
+            IF (Rx < Rows) THEN
+               Json = Json : ','
+            END ELSE
+               Json = Json : ']}'
+            END
+         NEXT Rx
+      END ELSE
+         NULL
+      END
+      OPEN '' , 'AZAP' TO AZAP ELSE STOP
+      WRITE DirViewID ON AZAP , 'DirVIewID'
+      WRITE Json ON AZAP , DirViewID
+      WRITE Json ON DirViewFile , DirViewID
+      RETURN
+*********************************************************************
+CleanIt: 
+      Tmp = CHANGE(Tmp , "'" , ' ')
+      Tmp = CHANGE(Tmp , '"' , ' ')
+      Tmp = CHANGE(Tmp , '{' , '')
+      Tmp = CHANGE(Tmp , '}' , '')
+*      Tmp = CHANGE(Tmp , CHAR(253) , '\\]')
+*      Tmp = CHANGE(Tmp , CHAR(252) , '\\')
+      RETURN
+*********************************************************************
+GetFormConfig: 
+      Tmp =  'form field definitions are \"planned in another release'
+*      GOSUB CleanIt
+      CALL FFC.GET.PRINT.FIELDS(FormRec , FormFields)
+      FormConfig = FormFields
+      RETURN
+*********************************************************************
+AtExit: 
+      RETURN
+*********************************************************************
+      END
