@@ -1,0 +1,84 @@
+{
+    "matched": true,
+    "matchingForms": [{
+        "account": "FORM-FI",
+        "formID": "FORM*1728L",
+        "formName": "TRANSAMERICA LIFE (SD)LSE",
+        "date": "11/06/2008",
+        "description": "SOUTH DAKOTA - AN 1728 SD C0808",
+        "comment": "HLR",
+        "formFields": [{
+            "fieldNumber": "1",
+            "width": "35",
+            "conversion": "C",
+            "justification": "L",
+            "description": "DEAL#",
+            "default": "",
+            "printField": "DEAL#:&&#1"
+        }, {
+            "fieldNumber": "2",
+            "width": "30",
+            "conversion": "C",
+            "justification": "L",
+            "description": "BUYER",
+            "default": "",
+            "printField": "#8"
+        }, {
+            "fieldNumber": "3",
+            "width": "12",
+            "conversion": "D4/",
+            "justification": "L",
+            "description": "DOB",
+            "default": "",
+            "printField": "#17"
+        }]
+    }, {
+        "account": "FORM-FI",
+        "formID": "FORM*1728R",
+        "formName": "TRANSAMERICA LIFE (SD)RTL",
+        "date": "11/06/2008",
+        "description": "SOUTH DAKOTA - AN 1728 SD C0808",
+        "comment": "HLR",
+        "formFields": [{
+            "fieldNumber": "1",
+            "width": "35",
+            "conversion": "C",
+            "justification": "L",
+            "description": "DEAL#",
+            "default": "",
+            "printField": "DEAL#:&&#1"
+        }, {
+            "fieldNumber": "2",
+            "width": "30",
+            "conversion": "C",
+            "justification": "L",
+            "description": "BUYER",
+            "default": "",
+            "printField": "#8"
+        }, {
+            "fieldNumber": "3",
+            "width": "12",
+            "conversion": "D4/",
+            "justification": "L",
+            "description": "DOB",
+            "default": "",
+            "printField": "#17"
+        }, {
+            "fieldNumber": "4",
+            "width": "45",
+            "conversion": "C",
+            "justification": "L",
+            "description": "ADD/CSZ",
+            "default": "",
+            "printField": "#13&#12&#10&#14"
+        }, {
+            "fieldNumber": "5",
+            "width": "10",
+            "conversion": "D4/",
+            "justification": "L",
+            "description": "EFFECTIVEDATE",
+            "default": "",
+            "printField": "#4"
+        }]
+    }]
+}

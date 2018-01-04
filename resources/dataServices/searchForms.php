@@ -1,40 +1,24 @@
 <?php
 
-$debug = true ;
-
-if ($debug){
-  $fp = fopen('/adp/3party/ffc/adynak/zap/test.txt','a+');
-}
-
 session_start();
 $data = json_decode(file_get_contents("php://input"));
 
-$data = new stdClass();
-$data->task = 'search';
-$data->pageID = 'search';
-$data->searchPattern = 'search';
-
 if ($data->task == 'search') {
-  // looks like this:
-  // {
-  //   "matched": true,
-  //   "matchingForms": [{
-  //       "account": "90-FI",
-  //       "formID": "FORM*3439",
-  //       "formName": "ALABAMA POA SOLD",
-  //       "date": "03/18/2015",
-  //       "description": "MVT 5-13 1/13  (SOLD)(PDF FILE)",
-  //       "comment": "(EXPO) KN (CH) CHECK DEALER SETUPS USED A3= SOLD VEH (B/C/BC/CB/O)"
-  //   }]
-  // }
+  // sample json in SearchForms/resources/dataServices
   $pageID = $data->pageID;
   $searchPattern = $data->searchPattern;
+
+  $pathToKsh = '/adp/tmp';
+  // lets run the ksh from our folder instead of /adp/tmp
+  $documentRoot = $_SERVER['DOCUMENT_ROOT'];
+  $pathToKsh = $documentRoot . '/paris/ffc/SearchForms/resources/dataServices';
+
   $cmd  = 'cd /adp/tmp;';
+  $cmd  = "cd $pathToKsh;";
   $cmd .= 'ksh ffcSearchForms.ksh ';
   $cmd .= $pageID . ' ';
   $cmd .= $searchPattern;
-  // $output = shell_exec($cmd);
-  $pageID = 'search';
+  $output = shell_exec($cmd);
 
   $json = file_get_contents("/adp/3party/ffc/formSearch/$pageID.json");
   // remove non-printing characters
@@ -45,7 +29,7 @@ if ($data->task == 'search') {
   echo ($json);
   // clean up the mess
   $cmd = "rm /adp/3party/ffc/formSearch/$pageID.json";
-  // $output = shell_exec($cmd);
+  $output = shell_exec($cmd);
 }
 
 else if ($data->task == 'getsessiondata') {
