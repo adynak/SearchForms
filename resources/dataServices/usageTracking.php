@@ -1,8 +1,11 @@
 <?php
   $data = json_decode(file_get_contents("php://input"));
 
+  // $data = new STDClass();
+  // $data->task =  'getUsage';
+
   $logFilename = '/adp/logs/ffc/usageTracking.json';
-  
+
   clearstatcache();
   $permissions = fileperms($logFilename);
   if ($permissions != 33204){
@@ -30,5 +33,10 @@
   
     $success = file_put_contents($logFilename, $jsonData);
 
+  }
+
+  else if ($data->task == 'getUsage') {
+    $json = file_get_contents($logFilename);
+    echo $json;
   }
 ?>

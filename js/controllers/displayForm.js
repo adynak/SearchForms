@@ -35,7 +35,7 @@ searchForms.controller('DisplayFormController', ['$scope', '$http', '$location',
         }
 
 
-        var gridData = Data.getSearchMatches();;
+        var gridData = Data.getSearchMatches();
         $scope.resultsCount = gridData.length;
         $scope.searchPattern = Data.getSearchPattern();
 

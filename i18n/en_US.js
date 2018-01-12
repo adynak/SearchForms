@@ -36,7 +36,15 @@ var txtReviewForm = {
     gridColumnJustification: 'Just',
     gridColumnDescription: 'Description',
     gridColumnDefault: 'Default',
-    gridColumnPrintField: 'Print'
+    gridColumnPrintField: 'Print',
+    gridColumnMatches: 'Number of Matches',
+    gridColumnSearchPattern: 'Search Pattern',
+    gridColumnTime: 'Time',
+    pluralSearchLogs: [
+        {tag: 'No Usage of SearchForms '},
+        {tag: 'Usage of SearchForms '},
+        {tag: 'Usages of SearchForms '}
+    ],
 };
 
 var markerConfig = {

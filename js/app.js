@@ -18,6 +18,12 @@ searchForms.config(['$routeProvider', '$locationProvider', function($routeProvid
         controller: 'DisplayFormController',
         task: 'getsessiondata'
     }).
+    when('/usageTracking', {
+        templateUrl: 'views/usageTracking.html',
+        controller: 'UsageTrackingController',
+        task: 'getsessiondata'
+    }).
+
     otherwise({
         redirectTo: '/search'
     });

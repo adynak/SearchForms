@@ -13,7 +13,7 @@ searchForms.controller('SearchController', ['$scope', '$http', '$location', 'Dat
             Data.searchFormsFiles($scope.searchPattern).then(function(status) {
                 if (status.matched == true) {
                     Data.setSearchMatches(status.matchingForms);
-                    Data.setUsageTracking(status.matchingForms.length);
+                    Data.setLogFile(status.matchingForms.length);
                     $location.path('/displayForm');
                 } else {
                     var searchError;

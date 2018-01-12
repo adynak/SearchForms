@@ -135,7 +135,7 @@ searchForms.factory("Data", ['$http', '$q', '$rootScope',
             return qObject.promise;            
         };
 
-        var setUsageTracking = function(numberOfMatches){
+        var setLogFile = function(numberOfMatches){
             var qObject = $q.defer();
             var params = {
                 task: 'trackUsage',
@@ -157,6 +157,28 @@ searchForms.factory("Data", ['$http', '$q', '$rootScope',
             });
             return qObject.promise;            
         };
+
+        var getLogFile = function(){
+            var qObject = $q.defer();
+            var params = {
+                task: 'getUsage'
+            };
+
+            $http({
+                method: 'POST',
+                url: 'resources/dataServices/usageTracking.php',
+                data: params,
+                // headers: {
+                //     'Content-Type': 'application/x-www-form-urlencoded'
+                // },
+            }).then(function(success) {
+                qObject.resolve(success.data);
+            }, function(err) {
+                console.log(err);
+            });
+            return qObject.promise;            
+        };
+
 
         var logout = function(member){
             var qObject = $q.defer();
@@ -224,7 +246,8 @@ searchForms.factory("Data", ['$http', '$q', '$rootScope',
             setFormDefinition: setFormDefinition,
             setSecurityInfo: setSecurityInfo,
             getSecurityInfo: getSecurityInfo,
-            setUsageTracking: setUsageTracking
+            setLogFile: setLogFile,
+            getLogFile: getLogFile
         };
     }
 ]);
